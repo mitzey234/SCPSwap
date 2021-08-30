@@ -4,6 +4,7 @@ namespace SCPSwap
 {
 	public class ScpSwap : Plugin<Config>
 	{
+		public static ScpSwap Instance;
 		public EventHandlers Handler { get; private set; }
 		public override string Name => nameof(ScpSwap);
 		public override string Author => "Cyanox";
@@ -12,12 +13,12 @@ namespace SCPSwap
 
 		public override void OnEnabled()
 		{
+			Instance = this;
 			Handler = new EventHandlers(this);
 			Exiled.Events.Handlers.Server.WaitingForPlayers += Handler.OnWaitingForPlayers;
 			Exiled.Events.Handlers.Server.RoundStarted += Handler.OnRoundStart;
 			Exiled.Events.Handlers.Server.RoundEnded += Handler.OnRoundEnd;
 			Exiled.Events.Handlers.Server.RestartingRound += Handler.OnRoundRestart;
-			Exiled.Events.Handlers.Server.SendingConsoleCommand += Handler.OnConsoleCommand;
 		}
 
 		public override void OnDisabled()
@@ -26,7 +27,6 @@ namespace SCPSwap
 			Exiled.Events.Handlers.Server.RoundStarted -= Handler.OnRoundStart;
 			Exiled.Events.Handlers.Server.RoundEnded -= Handler.OnRoundEnd;
 			Exiled.Events.Handlers.Server.RestartingRound -= Handler.OnRoundRestart;
-			Exiled.Events.Handlers.Server.SendingConsoleCommand -= Handler.OnConsoleCommand;
 			Handler = null;
 		}
 
