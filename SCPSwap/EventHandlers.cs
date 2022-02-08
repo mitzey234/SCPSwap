@@ -35,7 +35,7 @@ namespace SCPSwap
 			{"doctor", RoleType.Scp049},
 			{"0492", RoleType.Scp0492},
 			{"zombie", RoleType.Scp0492},
-			//{"966", RoleType.None }
+			{"966", RoleType.None }
 		};
 
 		public ScpSwap plugin;
@@ -64,8 +64,8 @@ namespace SCPSwap
 
 		internal void PerformSwap(Player source, Player dest)
 		{
-			//bool source966 = source.SessionVariables.ContainsKey("is966") && (bool)source.SessionVariables["is966"];
-			//bool dest966 = dest.SessionVariables.ContainsKey("is966") && (bool)dest.SessionVariables["is966"];
+			bool source966 = source.SessionVariables.ContainsKey("is966") && (bool)source.SessionVariables["is966"];
+			bool dest966 = dest.SessionVariables.ContainsKey("is966") && (bool)dest.SessionVariables["is966"];
 			source.ReferenceHub.characterClassManager.TargetConsolePrint(source.ReferenceHub.scp079PlayerScript.connectionToClient, "Swap successful!", "green");
 
 			RoleType sRole = source.Role;
@@ -77,17 +77,21 @@ namespace SCPSwap
 			float sHealth = source.Health;
 			float dHealth = dest.Health;
 
-			//if (!dest966) source.Role = dRole;
-			//else Swap966(source);
-			source.Role = dRole;
-			source.Position = dPos;
-			source.Health = dHealth;
+			if (dest966) Swap966(source);
+			else
+			{
+				source.Role = dRole;
+				source.Position = dPos;
+				source.Health = dHealth;
+			}
 
-			//if (!source966) dest.Role = sRole;
-			//else Swap966(dest);
-			dest.Role = sRole;
-			dest.Position = sPos;
-			dest.Health = sHealth;
+			if (source966) Swap966(dest);
+			else
+			{
+				dest.Role = sRole;
+				dest.Position = sPos;
+				dest.Health = sHealth;
+			}
 
 			ongoingReqs.Remove(source);
 		}
@@ -123,11 +127,11 @@ namespace SCPSwap
 			allowSwaps = false;
 		}
 
-		//public void Swap966(Player newPlayer)
-		//{
-		//	Assembly assembly = Loader.Plugins.First(pl => pl.Name == "scp966")?.Assembly;
-		//	if (assembly == null) return;
-		//	assembly.GetType("scp966.API")?.GetMethod("Swap", BindingFlags.Public | BindingFlags.Static)?.Invoke(null, new[] { newPlayer });
-		//}
+		public void Swap966(Player newPlayer)
+		{
+			Assembly assembly = Loader.Plugins.First(pl => pl.Name == "scp966")?.Assembly;
+			if (assembly == null) return;
+			assembly.GetType("scp966.API.Scp966API")?.GetMethod("Swap", BindingFlags.Public | BindingFlags.Static)?.Invoke(null, new[] { newPlayer });
+		}
 	}
 }

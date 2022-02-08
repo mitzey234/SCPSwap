@@ -36,11 +36,11 @@ namespace BrightPlugin_EXILED.Commands
 					return true;
 				}
 
-				if (player.SessionVariables.ContainsKey("is966") && (bool)player.SessionVariables["is966"])
+				/*if (player.SessionVariables.ContainsKey("is966") && (bool)player.SessionVariables["is966"])
 				{
 					response = "<color=\"red\">Due to issues regarding 966, SCP 966 is not allowed to swap.</color>";
 					return true;
-				}
+				}*/
 
 				if (!handlers.allowSwaps)
 				{
@@ -126,11 +126,11 @@ namespace BrightPlugin_EXILED.Commands
 								if (!req966) swap = Player.List.FirstOrDefault(x => role == RoleType.Scp93953 ? x.Role == role || x.Role == RoleType.Scp93989 : x.Role == role);
 								else swap = Player.List.FirstOrDefault(x => x.SessionVariables.ContainsKey("is966") && (bool)x.SessionVariables["is966"]);
 
-								if (swap.SessionVariables.ContainsKey("is966") && (bool)swap.SessionVariables["is966"])
+								/*if (swap.SessionVariables.ContainsKey("is966") && (bool)swap.SessionVariables["is966"])
 								{
 									response = "<color=\"red\">Due to issues regarding 966, SCP 966 is not allowed to swap.</color>";
 									return true;
-								}
+								}*/
 
 								if (swap != null)
 								{
