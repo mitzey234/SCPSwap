@@ -80,7 +80,7 @@ namespace SCPSwap
 			if (dest966) Swap966(source);
 			else
 			{
-				source.Role = dRole;
+				source.Role.Type = dRole;
 				source.Position = dPos;
 				source.Health = dHealth;
 			}
@@ -88,7 +88,7 @@ namespace SCPSwap
 			if (source966) Swap966(dest);
 			else
 			{
-				dest.Role = sRole;
+				dest.Role.Type = sRole;
 				dest.Position = sPos;
 				dest.Health = sHealth;
 			}

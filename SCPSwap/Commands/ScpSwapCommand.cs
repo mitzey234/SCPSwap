@@ -30,7 +30,7 @@ namespace BrightPlugin_EXILED.Commands
 					return true;
 				}
 
-				if (player.Team != Team.SCP)
+				if (player.Role.Team != Team.SCP)
 				{
 					response = "<color=\"red\">You're not an SCP, why did you think that would work.</color>";
 					return true;
